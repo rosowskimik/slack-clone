@@ -1,0 +1,38 @@
+version: '2.4'
+
+services:
+  app:
+    image: dcgql:dev
+    build:
+      target: dev
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+    env_file:
+      - .env
+    environment:
+      PATH: /usr/app/node_modules/.bin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    depends_on:
+      - redis
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test1234
+      POSTGRES_DB: testorm
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+
+  redis:
+    image: redis
+
+volumes:
+  pg_data:
