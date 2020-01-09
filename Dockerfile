@@ -7,8 +7,8 @@ COPY --chown=node:node package.json yarn.lock* ./
 RUN yarn install
 
 FROM base as dev
-ENV NODE_DEV=development
-CMD [ "nodemon", "--exec", "ts-node", "src/index.ts" ]
+ENV NODE_ENV=development PATH=/usr/app/node_modules/.bin:$PATH
+CMD [ "ts-node-dev", "--respawn", "src/index.ts" ]
 
 FROM dev as prod
 ENV NODE_ENV=production

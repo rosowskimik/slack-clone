@@ -9,11 +9,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - .:/usr/app
-    env_file:
-      - .env
-    environment:
-      PATH: /usr/app/node_modules/.bin
+      - .:/usr/app/
+    env_file: ./.env
     depends_on:
       postgres:
         condition: service_healthy
@@ -30,9 +27,14 @@ services:
       POSTGRES_DB: testorm
     healthcheck:
       test: pg_isready -U postgres -h 127.0.0.1
+    volumes:
+      - pg_data:/var/lib/postgresql/data
 
   redis:
-    image: redis
+    image: redis:5-alpine
+    volumes:
+      - redis_data:/data
 
 volumes:
   pg_data:
+  redis_data:
