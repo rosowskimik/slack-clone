@@ -23,13 +23,14 @@ export class Team extends BaseEntity {
   @Field()
   name: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @Field(() => User)
   owner: User;
 
   @OneToMany(
     () => Channel,
-    channel => channel.team
+    channel => channel.team,
+    { onDelete: 'CASCADE' }
   )
   @Field(() => [Channel])
   channels: Channel[];

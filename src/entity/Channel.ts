@@ -25,7 +25,7 @@ export class Channel extends BaseEntity {
   @Field()
   public: boolean;
 
-  @ManyToOne(() => Team)
+  @ManyToOne(() => Team, { onDelete: 'CASCADE' })
   @Field(() => Team)
   team: Team;
 

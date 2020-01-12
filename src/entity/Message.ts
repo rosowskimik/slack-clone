@@ -20,11 +20,11 @@ export class Message extends BaseEntity {
   @Field()
   text: string;
 
-  @ManyToOne(() => Channel)
+  @ManyToOne(() => Channel, { onDelete: 'CASCADE' })
   @Field(() => Channel)
   channel: Channel;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
   @Field(() => User)
   author: User;
 }
