@@ -4,7 +4,8 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  ManyToOne
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { User } from './User';
@@ -24,4 +25,8 @@ export class Team extends BaseEntity {
   @JoinTable()
   @Field(() => [User])
   users: User[];
+
+  @ManyToOne(() => User)
+  @Field(() => User)
+  owner: User;
 }
