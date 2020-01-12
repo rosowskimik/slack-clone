@@ -23,10 +23,10 @@ export class User extends BaseEntity {
   @Field()
   email: string;
 
+  @Column({ type: 'text' })
+  password: string;
+
   @ManyToMany(() => Team)
   @Field(() => [Team])
   teams: Team[];
-
-  @Column({ type: 'text' })
-  password: string;
 }
