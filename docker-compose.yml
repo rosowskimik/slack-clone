@@ -1,21 +1,19 @@
 version: '2.4'
 
 services:
-  app:
+  backend:
     image: dcgql:dev
     build:
       target: dev
       context: .
     ports:
-      - 3000:3000
+      - 8080:${BACKEND_PORT}
     volumes:
       - .:/usr/app/
     env_file: ./.env
     depends_on:
       postgres:
         condition: service_healthy
-    depends_on:
-      - redis
 
   postgres:
     image: postgres:alpine

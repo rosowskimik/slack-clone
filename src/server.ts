@@ -29,9 +29,10 @@ export const startServer = async () => {
   apolloServer.applyMiddleware({ app });
 
   // Start server
-  return app.listen(3000, () => {
+  const PORT = process.env.BACKEND_PORT || 3000;
+  return app.listen(PORT, () => {
     console.log(
-      `${new Date().toLocaleString()}: Server started on http://localhost:3000/graphql`
+      `${new Date().toLocaleString()}: Server started on http://localhost:${PORT}/graphql`
     );
   });
 };
@@ -41,9 +42,7 @@ export const closeOnSignal = (server: Server, signals: NodeJS.Signals[]) => {
   signals.forEach(signal => {
     process.on(signal, () => {
       server.close(() => {
-        console.log(
-          `${signal}: Server closed at ${new Date().toLocaleString()}`
-        );
+        console.log(`${new Date().toLocaleString()}: ${signal}: Server closed`);
         process.exit();
       });
     });
