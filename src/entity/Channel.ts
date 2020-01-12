@@ -3,10 +3,12 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { Team } from './Team';
+import { Message } from './Message';
 
 @Entity()
 @ObjectType()
@@ -26,4 +28,11 @@ export class Channel extends BaseEntity {
   @ManyToOne(() => Team)
   @Field(() => Team)
   team: Team;
+
+  @OneToMany(
+    () => Message,
+    message => message.channel
+  )
+  @Field(() => [Message])
+  messages: Message[];
 }
