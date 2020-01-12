@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  ManyToMany
+} from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
+import { Team } from './Team';
 
 @Entity()
 @ObjectType()
@@ -15,6 +22,10 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   @Field()
   email: string;
+
+  @ManyToMany(() => Team)
+  @Field(() => [Team])
+  teams: Team[];
 
   @Column({ type: 'text' })
   password: string;
