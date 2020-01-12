@@ -36,7 +36,7 @@ export class Team extends BaseEntity {
   channels: Channel[];
 
   @ManyToMany(() => User)
-  @JoinTable()
+  @JoinTable({ name: 'team_members' })
   @Field(() => [User])
   members: User[];
 }

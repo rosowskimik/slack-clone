@@ -4,11 +4,14 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  ManyToMany,
+  JoinTable
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { Team } from './Team';
 import { Message } from './Message';
+import { User } from './User';
 
 @Entity()
 @ObjectType()
@@ -21,7 +24,7 @@ export class Channel extends BaseEntity {
   @Field()
   name: string;
 
-  @Column()
+  @Column({ default: true })
   @Field()
   public: boolean;
 
@@ -34,4 +37,9 @@ export class Channel extends BaseEntity {
   )
   @Field(() => [Message])
   messages: Message[];
+
+  @ManyToMany(() => User)
+  @JoinTable({ name: 'channel_members' })
+  @Field(() => [User])
+  members: User[];
 }

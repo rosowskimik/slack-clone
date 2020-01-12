@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { Team } from './Team';
+import { Channel } from './Channel';
 
 @Entity()
 @ObjectType()
@@ -29,4 +30,7 @@ export class User extends BaseEntity {
   @ManyToMany(() => Team)
   @Field(() => [Team])
   teams: Team[];
+
+  @ManyToMany(() => Channel)
+  channels: Channel[];
 }
