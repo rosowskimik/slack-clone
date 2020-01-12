@@ -38,5 +38,5 @@ export class Team extends BaseEntity {
   @ManyToMany(() => User)
   @JoinTable()
   @Field(() => [User])
-  users: User[];
+  members: User[];
 }
