@@ -8,11 +8,11 @@ export class User extends BaseEntity {
   @Field(() => ID)
   id: number;
 
-  @Column({ length: 25 })
+  @Column({ length: 25, unique: true })
   @Field()
   username: string;
 
-  @Column()
+  @Column({ unique: true })
   @Field()
   email: string;
 
