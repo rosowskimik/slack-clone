@@ -6,6 +6,7 @@ import {
   ManyToMany
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
+import bcrypt from 'bcrypt';
 import { Team } from './Team';
 import { Channel } from './Channel';
 
@@ -33,4 +34,8 @@ export class User extends BaseEntity {
 
   @ManyToMany(() => Channel)
   channels: Channel[];
+
+  async hashPassword(salt: string | number) {
+    this.password = await bcrypt.hash(this.password, salt);
+  }
 }
