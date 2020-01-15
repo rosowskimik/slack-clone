@@ -44,4 +44,8 @@ export class User extends BaseEntity {
   async hashPassword(salt: string | number) {
     this.password = await bcrypt.hash(this.password, salt);
   }
+
+  async isPasswordValid(password: string) {
+    return await bcrypt.compare(password, this.password);
+  }
 }
