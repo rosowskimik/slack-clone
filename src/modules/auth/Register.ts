@@ -10,6 +10,7 @@ export class RegisterResolver {
 
     await user.hashPassword(12);
     await user.save();
+    user.teams = [];
 
     return user;
   }
