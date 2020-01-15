@@ -2,8 +2,11 @@ import path from 'path';
 import { Server } from 'http';
 import { createConnection } from 'typeorm';
 import express from 'express';
+import connectRedis from 'connect-redis';
+import session from 'express-session';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
+import { redis } from './utils/redis';
 
 export const startServer = async () => {
   // Connect to database
@@ -11,6 +14,25 @@ export const startServer = async () => {
 
   // Create express app
   const app = express();
+
+  // Use sessions with Redis store
+  const RedisStore = connectRedis(session);
+  app.use(
+    session({
+      store: new RedisStore({
+        client: redis
+      }),
+      name: 'qid',
+      secret: process.env.SESSION_SECRET!,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: parseInt(process.env.SESSION_COOKIE_AGE!, 10)
+      }
+    })
+  );
 
   // Create gql schema
   const schema = await buildSchema({
@@ -24,7 +46,8 @@ export const startServer = async () => {
 
   // Initialize ApolloServer
   const apolloServer = new ApolloServer({
-    schema
+    schema,
+    context: ({ req }) => ({ req })
   });
   apolloServer.applyMiddleware({ app });
 
