@@ -28,11 +28,17 @@ export class User extends BaseEntity {
   @Column({ type: 'text' })
   password: string;
 
-  @ManyToMany(() => Team)
+  @ManyToMany(
+    () => Team,
+    team => team.members
+  )
   @Field(() => [Team])
   teams: Team[];
 
-  @ManyToMany(() => Channel)
+  @ManyToMany(
+    () => Channel,
+    channel => channel.members
+  )
   channels: Channel[];
 
   async hashPassword(salt: string | number) {
