@@ -6,7 +6,7 @@ import { ApolloError } from 'apollo-server-express';
 export class LogoutResolver {
   @Mutation(() => Boolean)
   async logout(@Ctx() ctx: AppContext): Promise<boolean> {
-    ctx.req.session?.destroy(error => {
+    ctx.req.session!.destroy(error => {
       if (error) {
         console.error(error);
         throw new ApolloError(error.message);
