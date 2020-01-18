@@ -1,17 +1,18 @@
 import { Field, InputType } from 'type-graphql';
 import { Length, IsEmail } from 'class-validator';
-import { IsNotInUse } from './isAlreadyInUse';
 import { PasswordInput } from '../shared/PasswordInput';
+import { IsNotInUse } from '../../shared/isNotInUse';
+import { User } from '../../../entity/User';
 
 @InputType()
 export class RegisterInput extends PasswordInput {
   @Field()
   @Length(1, 25)
-  @IsNotInUse()
+  @IsNotInUse(User)
   username: string;
 
   @Field()
   @IsEmail()
-  @IsNotInUse()
+  @IsNotInUse(User)
   email: string;
 }
