@@ -2,24 +2,26 @@ import { FieldNode } from 'graphql';
 
 export const doesPathExist = (
   nodes: ReadonlyArray<FieldNode>,
-  path: string[]
-): boolean => {
+  path: string[],
+  previousResults: string[] = []
+): string[] | undefined => {
   if (!nodes) {
-    return false;
+    return;
   }
 
   const node = nodes.find(x => x.name.value === path[0]);
 
   if (!node) {
-    return false;
+    return;
   }
 
   if (path.length === 1) {
-    return true;
+    return previousResults.concat(path[0]);
   }
 
   return doesPathExist(
     node.selectionSet!.selections as FieldNode[],
-    path.slice(1)
+    path.slice(1),
+    previousResults
   );
 };

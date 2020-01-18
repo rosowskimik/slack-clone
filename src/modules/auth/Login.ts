@@ -14,9 +14,7 @@ export class LoginResolver {
     @Ctx() ctx: AppContext,
     @Info() { fieldNodes }: GraphQLResolveInfo
   ): Promise<User> {
-    const relations = doesPathExist(fieldNodes, ['login', 'teams'])
-      ? ['teams']
-      : [];
+    const relations = doesPathExist(fieldNodes, ['login', 'teams']);
 
     const user = await User.findOne({ where: { email }, relations });
 
