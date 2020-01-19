@@ -882,6 +882,19 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
+dataloader-factory@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/dataloader-factory/-/dataloader-factory-1.2.0.tgz#0e31d4f593bd597f954f004e9bf78c9ee7bed5e5"
+  integrity sha512-N/gMd2fAgOiL2ECYdNBqq+iQD77CjtVZaA11WX5tXwoRfhCv+B5hPZgyoaW/QJWThgvqcxxGKh7yQRl+XXtr1A==
+  dependencies:
+    dataloader "^1.4.0"
+    fast-json-stable-stringify "2.0.0"
+
+dataloader@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-1.4.0.tgz#bca11d867f5d3f1b9ed9f737bd15970c65dff5c8"
+  integrity sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==
+
 dateformat@~1.0.4-1.2.3:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-1.0.12.tgz#9f124b67594c937ff706932e4a642cca8dbbfee9"
@@ -1119,6 +1132,11 @@ express@^4.17.1:
     type-is "~1.6.18"
     utils-merge "1.0.1"
     vary "~1.1.2"
+
+fast-json-stable-stringify@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
+  integrity sha1-1RQsDK7msRifh9OnYREGT4bIu/I=
 
 fast-json-stable-stringify@^2.0.0:
   version "2.1.0"

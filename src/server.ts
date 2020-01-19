@@ -7,6 +7,7 @@ import session from 'express-session';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
 import { redis } from './utils/redis';
+import { DataLoaderFactory } from './utils/dataLoaders';
 
 export const startServer = async () => {
   // Connect to database
@@ -47,7 +48,11 @@ export const startServer = async () => {
   // Initialize ApolloServer
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({
+      req,
+      res,
+      dataLoaders: new DataLoaderFactory()
+    })
   });
   apolloServer.applyMiddleware({ app });
 

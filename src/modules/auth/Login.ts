@@ -3,7 +3,7 @@ import { LoginInput } from './login/LoginInput';
 import { AppContext } from '../../@types/AppContext';
 import { User } from '../../entity/User';
 import { AuthenticationError } from 'apollo-server-express';
-import { doesPathExist } from '../../utils/doesPathExist';
+import { loadRelations } from '../../utils/loadRelations';
 import { GraphQLResolveInfo } from 'graphql';
 
 @Resolver()
@@ -12,11 +12,14 @@ export class LoginResolver {
   async login(
     @Args() { email, password }: LoginInput,
     @Ctx() ctx: AppContext,
-    @Info() { fieldNodes }: GraphQLResolveInfo
+    @Info() info: GraphQLResolveInfo
   ): Promise<User> {
-    const relations = doesPathExist(fieldNodes, ['login', 'teams']);
+    const relations = loadRelations({ info, paths: ['teams'] });
 
-    const user = await User.findOne({ where: { email }, relations });
+    const user = await User.findOne({
+      where: { email },
+      loadRelationIds: { relations }
+    });
 
     if (!user || !(await user.isPasswordValid(password))) {
       throw new AuthenticationError('invalid email or password');
