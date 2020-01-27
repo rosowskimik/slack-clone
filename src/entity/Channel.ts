@@ -6,7 +6,8 @@ import {
   ManyToOne,
   OneToMany,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  Unique
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { Team } from './Team';
@@ -14,6 +15,7 @@ import { Message } from './Message';
 import { User } from './User';
 
 @Entity()
+@Unique(['name', 'team'])
 @ObjectType()
 export class Channel extends BaseEntity {
   @PrimaryGeneratedColumn()
