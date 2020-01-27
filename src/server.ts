@@ -1,6 +1,6 @@
 import path from 'path';
 import { Server } from 'http';
-import { createConnection } from 'typeorm';
+import { createConnection, Connection } from 'typeorm';
 import express from 'express';
 import connectRedis from 'connect-redis';
 import session from 'express-session';
@@ -11,7 +11,7 @@ import { DataLoaderFactory } from './utils/dataLoaders';
 
 export const startServer = async () => {
   // Connect to database
-  await createConnection();
+  const connection = await createConnection();
 
   // Create express app
   const app = express();
@@ -52,23 +52,37 @@ export const startServer = async () => {
       req,
       res,
       dataLoaders: new DataLoaderFactory()
-    })
+    }),
+    tracing: true
   });
   apolloServer.applyMiddleware({ app });
 
   // Start server
   const PORT = process.env.BACKEND_PORT || 3000;
-  return app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(
       `${new Date().toLocaleString()}: Server started on http://localhost:${PORT}/graphql`
     );
   });
+
+  return { server, connection };
 };
 
+interface ICloseOnSignal {
+  server: Server;
+  connection: Connection;
+  signals: NodeJS.Signals[];
+}
+
 // Gracefully shutdown server on specified signals
-export const closeOnSignal = (server: Server, signals: NodeJS.Signals[]) => {
+export const closeOnSignal = ({
+  signals,
+  server,
+  connection
+}: ICloseOnSignal) => {
   signals.forEach(signal => {
-    process.on(signal, () => {
+    process.on(signal, async () => {
+      await connection.close();
       server.close(() => {
         console.log(`${new Date().toLocaleString()}: ${signal}: Server closed`);
         process.exit();

@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 
-import { closeOnSignal, startServer } from './server';
+import { startServer, closeOnSignal } from './server';
 
 startServer()
-  .then(server => {
-    closeOnSignal(server, ['SIGTERM', 'SIGINT']);
+  .then(({ server, connection }) => {
+    closeOnSignal({ server, connection, signals: ['SIGTERM', 'SIGINT'] });
 
     process.on('unhandledRejection', error => {
       console.error(error);
