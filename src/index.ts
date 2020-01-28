@@ -8,7 +8,7 @@ startServer()
 
     process.on('unhandledRejection', error => {
       console.error(error);
-      server.close(() => {
+      server.stop(() => {
         console.error(`Server crashed at ${new Date().toLocaleString()}`);
         process.exit(1);
       });

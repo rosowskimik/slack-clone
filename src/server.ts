@@ -1,11 +1,11 @@
 import path from 'path';
-import { Server } from 'http';
 import { createConnection, Connection } from 'typeorm';
 import express from 'express';
 import connectRedis from 'connect-redis';
 import session from 'express-session';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
+import stoppable from 'stoppable';
 import { redis } from './utils/redis';
 
 export const startServer = async () => {
@@ -63,11 +63,11 @@ export const startServer = async () => {
     );
   });
 
-  return { server, connection };
+  return { server: stoppable(server, 600000), connection };
 };
 
 interface ICloseOnSignal {
-  server: Server;
+  server: stoppable.StoppableServer;
   connection: Connection;
   signals: NodeJS.Signals[];
 }
@@ -81,8 +81,12 @@ export const closeOnSignal = ({
   signals.forEach(signal => {
     process.on(signal, async () => {
       await connection.close();
-      server.close(() => {
-        console.log(`${new Date().toLocaleString()}: ${signal}: Server closed`);
+      server.stop((_, gracefully) => {
+        console.log(
+          `${new Date().toLocaleString()}: ${signal}: ${
+            gracefully ? 'Graceful' : 'Forced'
+          } server shutdown`
+        );
         process.exit();
       });
     });
