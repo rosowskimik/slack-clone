@@ -1,12 +1,13 @@
 import DataLoader from 'dataloader';
 import { Team } from '../entity/Team';
+import { relations } from '../constant/relations';
 
 export type TeamLoader = () => DataLoader<number, Team, number>;
 
 export const teamLoader: TeamLoader = () =>
   new DataLoader(async ids => {
     const teams = await Team.findByIds(ids as number[], {
-      relations: ['channels', 'members', 'owner']
+      relations: relations.team
     });
 
     const teamMap: { [key: string]: Team } = {};

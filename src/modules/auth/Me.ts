@@ -10,7 +10,7 @@ export class MeResolver {
   @Query(() => User)
   @UseMiddleware(isAuth)
   async me(@Ctx() ctx: AppContext, @Info() info: GraphQLResolveInfo) {
-    const relations = loadRelations({ info, paths: ['teams'] });
+    const relations = loadRelations('user', info);
 
     const user = await User.findOne(ctx.req.session!.userId, {
       relations

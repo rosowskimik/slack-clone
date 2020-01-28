@@ -14,7 +14,7 @@ export class LoginResolver {
     @Ctx() ctx: AppContext,
     @Info() info: GraphQLResolveInfo
   ): Promise<User> {
-    const relations = loadRelations({ info, paths: ['teams'] });
+    const relations = loadRelations('user', info);
 
     const user = await User.findOne({
       where: { email },

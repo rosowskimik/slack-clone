@@ -12,7 +12,7 @@ export class TeamResolver {
     @Ctx() { loaders }: AppContext,
     @Info() info: GraphQLResolveInfo
   ) {
-    const relations = loadRelations({ info, paths: ['teams'] });
+    const relations = loadRelations('user', info);
     return relations.length > 0
       ? await loaders.userLoader.load(owner.id)
       : owner;

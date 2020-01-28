@@ -1,17 +1,18 @@
 import { FieldNode, GraphQLResolveInfo } from 'graphql';
+import { relations } from '../constant/relations';
 
-interface ILoadRelations {
-  info: GraphQLResolveInfo;
-  paths: string[];
-}
+type LoadRelations = (
+  parent: 'channel' | 'message' | 'team' | 'user',
+  info: GraphQLResolveInfo
+) => string[];
 
-export const loadRelations = ({
-  info: { fieldName, fieldNodes },
-  paths
-}: ILoadRelations): string[] => {
+export const loadRelations: LoadRelations = (
+  parent,
+  { fieldName, fieldNodes }
+) => {
   let results: string[] = [];
 
-  paths.forEach(path => {
+  relations[parent].forEach(path => {
     results = results.concat(doesPathExist(fieldNodes, [fieldName, path]));
   });
 
