@@ -7,7 +7,7 @@ import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
 import stoppable from 'stoppable';
 import { redis } from './utils/redis';
-import { teamLoader } from './loaders/teamLoader';
+import { teamLoader, userLoader } from './loaders';
 
 export const startServer = async () => {
   // Connect to database
@@ -52,7 +52,10 @@ export const startServer = async () => {
     context: ({ req, res }) => ({
       req,
       res,
-      teamLoader
+      loaders: {
+        teamLoader: teamLoader(),
+        userLoader: userLoader()
+      }
     })
   });
   apolloServer.applyMiddleware({ app });
