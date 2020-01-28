@@ -11,10 +11,8 @@ export class UserResolver {
     @Ctx() ctx: AppContext,
     @Info() info: GraphQLResolveInfo
   ) {
-    const teams = await ctx.dataLoaders
-      .getFiltered('team', info)
-      .loadMany(user.teams);
-
+    const ids = user.teams.map(team => team.id);
+    const teams = await ctx.teamLoader(info).loadMany(ids);
     return teams;
   }
 }

@@ -18,7 +18,7 @@ export class LoginResolver {
 
     const user = await User.findOne({
       where: { email },
-      loadRelationIds: { relations }
+      relations
     });
 
     if (!user || !(await user.isPasswordValid(password))) {

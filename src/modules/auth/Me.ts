@@ -13,7 +13,7 @@ export class MeResolver {
     const relations = loadRelations({ info, paths: ['teams'] });
 
     const user = await User.findOne(ctx.req.session!.userId, {
-      loadRelationIds: { relations }
+      relations
     });
     return user;
   }
