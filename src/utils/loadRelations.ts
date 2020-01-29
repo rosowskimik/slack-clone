@@ -1,8 +1,9 @@
 import { FieldNode, GraphQLResolveInfo } from 'graphql';
 import { relations } from '../constant/relations';
+import { RelationOwner } from '../@types/RelationOwner';
 
 type LoadRelations = (
-  parent: 'channel' | 'message' | 'team' | 'user',
+  parent: RelationOwner,
   info: GraphQLResolveInfo
 ) => string[];
 
