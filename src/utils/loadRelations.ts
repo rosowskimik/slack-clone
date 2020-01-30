@@ -1,5 +1,5 @@
 import { FieldNode, GraphQLResolveInfo } from 'graphql';
-import { relations } from '../constant/relations';
+import { dataRelations } from '../constant/dataRelations';
 import { RelationOwner } from '../@types/RelationOwner';
 
 type LoadRelations = (
@@ -13,7 +13,7 @@ export const loadRelations: LoadRelations = (
 ) => {
   let results: string[] = [];
 
-  relations[parent].forEach(path => {
+  dataRelations[parent].forEach(path => {
     results = results.concat(doesPathExist(fieldNodes, [fieldName, path]));
   });
 

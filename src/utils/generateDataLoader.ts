@@ -1,6 +1,6 @@
 import DataLoader from 'dataloader';
 import { BaseEntity } from 'typeorm';
-import { relations } from '../constant/relations';
+import { dataRelations } from '../constant/dataRelations';
 import { RelationOwner } from '../@types/RelationOwner';
 
 export const generateDataLoader = <
@@ -12,7 +12,7 @@ export const generateDataLoader = <
 ) => () =>
   new DataLoader<V['id'], V>(async ids => {
     const results = await Entity.findByIds<V>(ids as number[], {
-      relations: relations[parent]
+      relations: dataRelations[parent]
     });
 
     const dataMap: { [key: string]: V } = {};
