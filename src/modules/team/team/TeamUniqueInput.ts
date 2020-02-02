@@ -4,7 +4,7 @@ import { ValidateIf, IsNotEmpty } from 'class-validator';
 const message = 'Please provide at least one of search conditions';
 
 @InputType()
-export class TeamInput {
+export class TeamUniqueInput {
   @Field({ nullable: true })
   @ValidateIf(o => !o.name)
   @IsNotEmpty({ message })

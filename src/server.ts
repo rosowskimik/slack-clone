@@ -71,18 +71,18 @@ export const startServer = async () => {
   return { server: stoppable(server, 600000), connection };
 };
 
-interface ICloseOnSignal {
+type CloseOnSignal = {
   server: stoppable.StoppableServer;
   connection: Connection;
   signals: NodeJS.Signals[];
-}
+};
 
 // Gracefully shutdown server on specified signals
 export const closeOnSignal = ({
-  signals,
   server,
-  connection
-}: ICloseOnSignal) => {
+  connection,
+  signals
+}: CloseOnSignal) => {
   signals.forEach(signal => {
     process.on(signal, async () => {
       await connection.close();
