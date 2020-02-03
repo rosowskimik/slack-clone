@@ -1,28 +1,53 @@
 version: '2.4'
 
 services:
-  app:
-    image: slack-clone:dev
+  server:
+    image: slack-clone-server:dev
     build:
       target: dev
-      context: .
+      context: ./services/server
     ports:
       - ${BACKEND_PORT}:${BACKEND_PORT}
-    volumes:
-      - .:/bin/www/
-    env_file: ./.env
+    env_file: .env
+    networks:
+      internal:
+      public:
+        aliases:
+          - ${SERVER_HOST}
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./services/server:/bin/www/
+      - ./node_modules:/bin/www/node_modules
+
+  client:
+    image: slack-clone-client:dev
+    build:
+      target: dev
+      context: ./services/client
+    ports:
+      - 3000:3000
+    networks:
+      - public
+    depends_on:
+      - server
+    volumes:
+      - ./services/client:/bin/www/
+      - ./node_modules:/bin/www/node_modules
 
   postgres:
     image: postgres:alpine
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: test
-      POSTGRES_PASSWORD: test1234
-      POSTGRES_DB: testorm
+      POSTGRES_USER: ${TYPEORM_USERNAME}
+      POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
+      POSTGRES_DB: ${TYPEORM_DATABASE}
+    networks:
+      internal:
+        aliases:
+          - ${TYPEORM_HOST}
     healthcheck:
       test: pg_isready -U postgres -h 127.0.0.1
     volumes:
@@ -30,8 +55,16 @@ services:
 
   redis:
     image: redis:5-alpine
+    networks:
+      internal:
+        aliases:
+          - ${REDIS_HOST}
     volumes:
       - redis_data:/data
+
+networks:
+  internal:
+  public:
 
 volumes:
   pg_data:
