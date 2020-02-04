@@ -34,6 +34,8 @@
     "typescript": "^3.7.4"
   },
   "scripts": {
-    "start": "ts-node-dev --respawn --no-notify src/index.ts"
+    "start": "ts-node-dev --respawn --no-notify src/index.ts",
+    "build": "tsc -b",
+    "docker:build": "docker image build -t=slack-clone-server:prod . --target=prod"
   }
 }

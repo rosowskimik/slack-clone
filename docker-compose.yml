@@ -21,21 +21,6 @@ services:
       - ./services/server:/bin/www/
       - ./node_modules:/bin/www/node_modules
 
-  client:
-    image: slack-clone-client:dev
-    build:
-      target: dev
-      context: ./services/client
-    ports:
-      - 3000:3000
-    networks:
-      - public
-    depends_on:
-      - server
-    volumes:
-      - ./services/client:/bin/www/
-      - ./node_modules:/bin/www/node_modules
-
   postgres:
     image: postgres:alpine
     ports:

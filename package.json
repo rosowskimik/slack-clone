@@ -8,6 +8,11 @@
     "lerna": "^3.20.2"
   },
   "scripts": {
-    "gen:client": "lerna run gen --scope=@slack-clone/client"
+    "start:client": "lerna run start --stream --no-prefix --scope=@slack-clone/client",
+    "dev:client": "lerna run dev --stream --no-prefix --scope=@slack-clone/client",
+    "gen:client": "lerna run gen:types --stream --no-prefix --scope=@slack-clone/client",
+    "dev": "docker-compose up -d && yarn dev:client",
+    "build": "lerna run build --stream",
+    "docker:build": "lerna run docker:build --stream"
   }
 }

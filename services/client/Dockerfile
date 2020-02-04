@@ -4,12 +4,9 @@ RUN chown -R node:node .
 USER node
 COPY --chown=node:node package.json yarn.lock* ./
 RUN yarn install
+CMD [ "yarn", "start" ]
 
-FROM base as dev
-ENV NODE_ENV=development PATH=/bin/www/node_modules/.bin:$PATH
-CMD [ "react-scripts", "start" ]
-
-FROM dev as build
+FROM base as build
 ENV NODE_ENV=production
 COPY --chown=node:node . .
 RUN yarn build
