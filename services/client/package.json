@@ -5,10 +5,14 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
     "apollo-boost": "^0.4.7",
+    "formik": "^2.1.3",
     "graphql": "^14.6.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
+    "yup": "^0.28.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -19,6 +23,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.3",
+    "@types/yup": "^0.26.30",
     "apollo": "^2.22.0",
     "concurrently": "^5.1.0",
     "react-scripts": "3.3.1",
