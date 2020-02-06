@@ -1,10 +1,11 @@
-import { Resolver, Mutation, Ctx, Args, Info } from 'type-graphql';
-import { LoginInput } from './login/LoginInput';
+import { AuthenticationError } from 'apollo-server-express';
+import { GraphQLResolveInfo } from 'graphql';
+import { Args, Ctx, Info, Mutation, Resolver } from 'type-graphql';
+
 import { AppContext } from '../../@types/AppContext';
 import { User } from '../../entity/User';
-import { AuthenticationError } from 'apollo-server-express';
 import { loadRelations } from '../../utils/loadRelations';
-import { GraphQLResolveInfo } from 'graphql';
+import { LoginInput } from './login/LoginInput';
 
 @Resolver()
 export class LoginResolver {

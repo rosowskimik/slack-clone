@@ -1,17 +1,11 @@
+import { Field, ID, ObjectType } from 'type-graphql';
 import {
-  Entity,
-  BaseEntity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  OneToMany,
-  ManyToMany,
-  JoinTable,
-  Unique
+    BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn,
+    Unique
 } from 'typeorm';
-import { ObjectType, Field, ID } from 'type-graphql';
-import { Team } from './Team';
+
 import { Message } from './Message';
+import { Team } from './Team';
 import { User } from './User';
 
 @Entity()

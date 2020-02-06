@@ -1,8 +1,9 @@
-import { Resolver, Query, Arg, Info } from 'type-graphql';
-import { User } from '../../entity/User';
-import { UserUniqueInput } from './user/UserUniqueInput';
 import { GraphQLResolveInfo } from 'graphql';
+import { Arg, Info, Query, Resolver } from 'type-graphql';
+
+import { User } from '../../entity/User';
 import { loadRelations } from '../../utils/loadRelations';
+import { UserUniqueInput } from './user/UserUniqueInput';
 
 @Resolver()
 export class UserResolver {

@@ -1,7 +1,8 @@
 import DataLoader from 'dataloader';
 import { BaseEntity } from 'typeorm';
-import { dataRelations } from '../constant/dataRelations';
+
 import { RelationOwner } from '../@types/RelationOwner';
+import { dataRelations } from '../constant/dataRelations';
 
 export const generateDataLoader = <
   E extends typeof BaseEntity,

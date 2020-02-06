@@ -1,5 +1,6 @@
-import { BaseEntity } from 'typeorm';
 import DataLoader from 'dataloader';
+import { BaseEntity } from 'typeorm';
+
 // import { Channel } from 'src/entity/Channel';
 // import { Message } from '../entity/Message';
 import { Team } from '../entity/Team';

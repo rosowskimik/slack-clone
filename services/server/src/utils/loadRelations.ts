@@ -1,6 +1,7 @@
 import { FieldNode, GraphQLResolveInfo } from 'graphql';
-import { dataRelations } from '../constant/dataRelations';
+
 import { RelationOwner } from '../@types/RelationOwner';
+import { dataRelations } from '../constant/dataRelations';
 
 type LoadRelations = (
   parent: RelationOwner,

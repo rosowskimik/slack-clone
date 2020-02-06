@@ -1,5 +1,5 @@
+import { FieldAttributes, useField } from 'formik';
 import React from 'react';
-import { useField, FieldAttributes } from 'formik';
 import { Form } from 'semantic-ui-react';
 
 interface Props {

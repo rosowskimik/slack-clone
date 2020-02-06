@@ -1,7 +1,8 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { Resolver, FieldResolver, Root, Ctx, Info } from 'type-graphql';
-import { Team } from '../../entity/Team';
+import { Ctx, FieldResolver, Info, Resolver, Root } from 'type-graphql';
+
 import { AppContext } from '../../@types/AppContext';
+import { Team } from '../../entity/Team';
 import { loadRelations } from '../../utils/loadRelations';
 
 @Resolver(of => Team)

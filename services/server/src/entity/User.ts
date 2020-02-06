@@ -1,14 +1,9 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  BaseEntity,
-  ManyToMany
-} from 'typeorm';
-import { ObjectType, Field, ID } from 'type-graphql';
 import bcrypt from 'bcrypt';
-import { Team } from './Team';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Channel } from './Channel';
+import { Team } from './Team';
 
 @Entity()
 @ObjectType()

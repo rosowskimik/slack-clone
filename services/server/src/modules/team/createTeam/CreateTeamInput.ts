@@ -1,7 +1,8 @@
-import { Field, InputType } from 'type-graphql';
 import { Length } from 'class-validator';
-import { IsNotInUse } from '../../shared/isNotInUse';
+import { Field, InputType } from 'type-graphql';
+
 import { Team } from '../../../entity/Team';
+import { IsNotInUse } from '../../shared/isNotInUse';
 
 @InputType()
 export class CreateTeamInput {

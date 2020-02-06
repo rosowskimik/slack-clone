@@ -1,9 +1,10 @@
-import { Resolver, Mutation, UseMiddleware, Arg, Ctx } from 'type-graphql';
-import { CreateTeamInput } from './createTeam/CreateTeamInput';
-import { isAuth } from '../../middleware/isAuth';
+import { Arg, Ctx, Mutation, Resolver, UseMiddleware } from 'type-graphql';
+
 import { AppContext } from '../../@types/AppContext';
 import { Team } from '../../entity/Team';
 import { User } from '../../entity/User';
+import { isAuth } from '../../middleware/isAuth';
+import { CreateTeamInput } from './createTeam/CreateTeamInput';
 
 @Resolver()
 export class CreateTeamResolver {

@@ -1,8 +1,4 @@
-import {
-  ValidationOptions,
-  registerDecorator,
-  ValidationArguments
-} from 'class-validator';
+import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator';
 import { BaseEntity } from 'typeorm';
 
 export function IsNotInUse<T extends typeof BaseEntity>(

@@ -1,7 +1,8 @@
-import { Resolver, Query, Arg, Info } from 'type-graphql';
 import { GraphQLResolveInfo } from 'graphql';
-import { loadRelations } from '../../utils/loadRelations';
+import { Arg, Info, Query, Resolver } from 'type-graphql';
+
 import { Team } from '../../entity/Team';
+import { loadRelations } from '../../utils/loadRelations';
 import { TeamUniqueInput } from './team/TeamUniqueInput';
 
 @Resolver()

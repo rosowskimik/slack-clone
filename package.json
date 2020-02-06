@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start:client": "lerna run start --stream --no-prefix --scope=@slack-clone/client",
+    "start:server": "docker-compose up -d",
     "dev:client": "lerna run dev --stream --no-prefix --scope=@slack-clone/client",
+    "dev:server": "docker-compose up -d && docker-compose logs -f server",
     "gen:client": "lerna run gen:types --stream --no-prefix --scope=@slack-clone/client",
     "dev": "docker-compose up -d && yarn dev:client",
     "build": "lerna run build --stream",

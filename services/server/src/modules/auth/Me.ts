@@ -1,8 +1,9 @@
-import { Resolver, Query, UseMiddleware, Ctx, Info } from 'type-graphql';
 import { GraphQLResolveInfo } from 'graphql';
+import { Ctx, Info, Query, Resolver, UseMiddleware } from 'type-graphql';
+
+import { AppContext } from '../../@types/AppContext';
 import { User } from '../../entity/User';
 import { isAuth } from '../../middleware/isAuth';
-import { AppContext } from '../../@types/AppContext';
 import { loadRelations } from '../../utils/loadRelations';
 
 @Resolver()

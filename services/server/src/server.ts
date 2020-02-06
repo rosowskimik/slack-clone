@@ -1,13 +1,14 @@
-import path from 'path';
-import { createConnection, Connection } from 'typeorm';
-import express from 'express';
-import connectRedis from 'connect-redis';
-import session from 'express-session';
-import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server-express';
+import connectRedis from 'connect-redis';
+import express from 'express';
+import session from 'express-session';
+import path from 'path';
 import stoppable from 'stoppable';
-import { redis } from './utils/redis';
+import { buildSchema } from 'type-graphql';
+import { Connection, createConnection } from 'typeorm';
+
 import { teamLoader, userLoader } from './loaders';
+import { redis } from './utils/redis';
 
 export const startServer = async () => {
   // Connect to database

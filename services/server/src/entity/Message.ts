@@ -1,13 +1,8 @@
-import {
-  Entity,
-  BaseEntity,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  Column
-} from 'typeorm';
-import { ObjectType, Field, ID } from 'type-graphql';
-import { User } from './User';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Channel } from './Channel';
+import { User } from './User';
 
 @Entity()
 @ObjectType()

@@ -1,6 +1,7 @@
-import { Resolver, Mutation, Ctx } from 'type-graphql';
-import { AppContext } from '../../@types/AppContext';
 import { ApolloError } from 'apollo-server-express';
+import { Ctx, Mutation, Resolver } from 'type-graphql';
+
+import { AppContext } from '../../@types/AppContext';
 
 @Resolver()
 export class LogoutResolver {

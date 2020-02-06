@@ -3,10 +3,7 @@ import { Button } from 'semantic-ui-react';
 
 import { useMutation } from '@apollo/react-hooks';
 
-import {
-  registerUser,
-  registerUserVariables
-} from '../../../generated/registerUser.gql';
+import { registerUser, registerUserVariables } from '../../../generated/registerUser.gql';
 import CustomForm from '../../components/custom-form/custom-form.component';
 import InputField from '../../components/input-field/input-field.component';
 import REGISTER from './register.mutation';

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Formik, FormikValues, FormikHelpers } from 'formik';
-import { Container, Header, Form, Message } from 'semantic-ui-react';
 import { ApolloError } from 'apollo-boost';
+import { Formik, FormikHelpers, FormikValues } from 'formik';
+import React from 'react';
+import { Container, Form, Header, Message } from 'semantic-ui-react';
 import * as yup from 'yup';
 
 interface Props<Values extends FormikValues> {

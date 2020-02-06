@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { startServer, closeOnSignal } from './server';
+import { closeOnSignal, startServer } from './server';
 
 startServer()
   .then(({ server, connection }) => {
