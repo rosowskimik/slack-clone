@@ -9,6 +9,7 @@ import { Connection, createConnection } from 'typeorm';
 
 import { teamLoader, userLoader } from './loaders';
 import { redis } from './utils/redis';
+import { ErrorHandler } from './middleware/ErrorHandler';
 
 export const startServer = async () => {
   // Connect to database
@@ -43,7 +44,8 @@ export const startServer = async () => {
         __dirname,
         `/modules/**/*.${process.env.NODE_ENV === 'development' ? 'ts' : 'js'}`
       )
-    ]
+    ],
+    globalMiddlewares: [ErrorHandler]
   });
 
   // Initialize ApolloServer
