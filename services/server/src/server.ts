@@ -61,7 +61,10 @@ export const startServer = async () => {
       }
     })
   });
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({
+    app,
+    cors: { origin: process.env.PUBLIC_URL, credentials: true }
+  });
 
   // Start server
   const PORT = process.env.BACKEND_PORT || 3000;
