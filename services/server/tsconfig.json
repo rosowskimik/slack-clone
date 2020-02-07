@@ -6,8 +6,6 @@
     "lib": ["ES6", "ES2017", "ESNext.AsyncIterable"],
     "outDir": "./dist",
     "rootDir": "src",
-    "declaration": false,
-    "sourceMap": true,
     "composite": true,
     "removeComments": true,
     "noImplicitAny": true,
