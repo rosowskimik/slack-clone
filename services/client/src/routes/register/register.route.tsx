@@ -3,11 +3,14 @@ import { Button } from 'semantic-ui-react';
 
 import { useMutation } from '@apollo/react-hooks';
 
-import { registerUser, registerUserVariables } from '../../../generated/registerUser.gql';
+import {
+  register_user,
+  register_userVariables
+} from '../../../generated/register_user.gql';
 import CustomForm from '../../components/custom-form/custom-form.component';
 import InputField from '../../components/input-field/input-field.component';
-import REGISTER from './register.mutation';
 import validationSchema from './register.validation';
+import { REGISTER } from './register.mutation';
 
 interface Props {}
 
@@ -20,8 +23,8 @@ const initialValues = {
 
 const Register: React.FC<Props> = () => {
   const [executeMutation, { error, loading }] = useMutation<
-    registerUser,
-    registerUserVariables
+    register_user,
+    register_userVariables
   >(REGISTER);
 
   return (
@@ -30,7 +33,7 @@ const Register: React.FC<Props> = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       loading={loading}
-      error={error}
+      error={error?.graphQLErrors[0]?.message}
       onSubmit={async (values, { resetForm }) => {
         try {
           await executeMutation({ variables: values });

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-export default gql`
-  mutation registerUser(
+export const REGISTER = gql`
+  mutation register_user(
     $username: String!
     $email: String!
     $password: String!

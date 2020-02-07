@@ -1,4 +1,3 @@
-import { ApolloError } from 'apollo-boost';
 import { Formik, FormikHelpers, FormikValues } from 'formik';
 import React from 'react';
 import { Container, Form, Header, Message } from 'semantic-ui-react';
@@ -7,7 +6,7 @@ import * as yup from 'yup';
 interface Props<Values extends FormikValues> {
   header: string;
   loading?: boolean;
-  error?: ApolloError | undefined;
+  error?: string | undefined;
   validationSchema: yup.Schema<any>;
   initialValues: Values;
   onSubmit: (
@@ -40,9 +39,11 @@ const CustomForm = <Values extends FormikValues>({
         {({ handleSubmit }) => (
           <Form onSubmit={handleSubmit} loading={loading} error={!!error}>
             {error && (
-              <Message error>
-                {JSON.stringify(error?.graphQLErrors[0], null, 2)}
-              </Message>
+              <Message
+                error
+                header='Something went wrong...'
+                content={error[0].toUpperCase() + error.slice(1)}
+              />
             )}
             {children}
           </Form>
