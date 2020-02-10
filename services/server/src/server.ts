@@ -55,6 +55,7 @@ export const startServer = async () => {
     context: ({ req, res }) => ({
       req,
       res,
+      manager: connection.manager,
       loaders: {
         teamLoader: teamLoader(),
         userLoader: userLoader()

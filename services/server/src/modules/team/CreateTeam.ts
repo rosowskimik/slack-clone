@@ -5,6 +5,7 @@ import { Team } from '../../entity/Team';
 import { User } from '../../entity/User';
 import { isAuth } from '../../middleware/isAuth';
 import { CreateTeamInput } from './createTeam/CreateTeamInput';
+import { Channel } from '../../entity/Channel';
 
 @Resolver()
 export class CreateTeamResolver {
@@ -16,13 +17,21 @@ export class CreateTeamResolver {
   ): Promise<Team> {
     const loggedInUser = User.create({ id: ctx.req.session!.userId });
 
-    const newTeam = Team.create({
-      ...data,
-      owner: loggedInUser,
+    const defaultChannel = Channel.create({
+      name: 'General',
       members: [loggedInUser]
     });
 
-    await newTeam.save();
+    const newTeam = Team.create({
+      ...data,
+      owner: loggedInUser,
+      members: [loggedInUser],
+      channels: [defaultChannel]
+    });
+    await ctx.manager.transaction(async entityManager => {
+      await entityManager.save(defaultChannel);
+      await entityManager.save(newTeam);
+    });
 
     return newTeam;
   }
