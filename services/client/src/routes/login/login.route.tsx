@@ -3,62 +3,48 @@ import { Button } from 'semantic-ui-react';
 
 import { useMutation } from '@apollo/react-hooks';
 
-import {
-  register_user,
-  register_userVariables
-} from '../../../generated/register_user.gql';
+import { login, loginVariables } from '../../../generated/login.gql';
 import CustomForm from '../../components/custom-form/custom-form.component';
 import InputField from '../../components/input-field/input-field.component';
-import validationSchema from './register.validation';
-import { REGISTER } from './register.mutation';
+import { LOGIN } from './login.mutation';
+import validationSchema from './login.validation';
 
 interface Props {}
 
 const initialValues = {
-  username: '',
   email: '',
-  password: '',
-  passwordConfirm: ''
+  password: ''
 };
 
-const Register: React.FC<Props> = () => {
-  const [mutate, { error, loading }] = useMutation<
-    register_user,
-    register_userVariables
-  >(REGISTER);
+const Login: React.FC<Props> = () => {
+  const [mutate, { error, loading }] = useMutation<login, loginVariables>(
+    LOGIN
+  );
 
   return (
     <CustomForm
-      header='Register'
+      header='Login'
       initialValues={initialValues}
       validationSchema={validationSchema}
-      loading={loading}
-      error={error?.graphQLErrors[0]?.message}
       onSubmit={async (values, { resetForm }) => {
         try {
           await mutate({ variables: values });
           resetForm();
         } catch (_) {}
       }}
+      error={error?.graphQLErrors[0]?.message}
+      loading={loading}
     >
-      <InputField label='Username' name='username' placeholder='Username' />
       <InputField label='Email' name='email' placeholder='Email' />
       <InputField
-        type='password'
-        name='password'
         label='Password'
+        name='password'
         placeholder='Password'
-      />
-      <InputField
         type='password'
-        name='passwordConfirm'
-        label='Confirm password'
-        placeholder='Confirm Password'
       />
-
       <Button type='submit'>Submit</Button>
     </CustomForm>
   );
 };
 
-export default Register;
+export default Login;
