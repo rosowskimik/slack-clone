@@ -11,7 +11,10 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import Routes from './routes';
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://localhost:8080/graphql' }),
+  link: new HttpLink({
+    uri: 'http://localhost:8080/graphql',
+    credentials: 'include'
+  }),
   cache: new InMemoryCache()
 });
 
