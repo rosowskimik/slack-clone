@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Register from './register/register.route';
-import Login from './login/login.route';
 import CreateTeam from './create-team/create-team.route';
+import Login from './login/login.route';
+import Register from './register/register.route';
 
 interface Props {}
 

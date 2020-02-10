@@ -1,4 +1,5 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 import { useMutation } from '@apollo/react-hooks';
@@ -9,14 +10,12 @@ import InputField from '../../components/input-field/input-field.component';
 import { LOGIN } from './login.mutation';
 import validationSchema from './login.validation';
 
-interface Props {}
-
 const initialValues = {
   email: '',
   password: ''
 };
 
-const Login: React.FC<Props> = () => {
+const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const [mutate, { error, loading }] = useMutation<login, loginVariables>(
     LOGIN
   );
@@ -26,10 +25,10 @@ const Login: React.FC<Props> = () => {
       header='Login'
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={async (values, { resetForm }) => {
+      onSubmit={async values => {
         try {
           await mutate({ variables: values });
-          resetForm();
+          history.push('/');
         } catch (_) {}
       }}
       error={error?.graphQLErrors[0]?.message}
