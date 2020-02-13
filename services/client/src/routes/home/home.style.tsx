@@ -18,12 +18,6 @@ export const StyledTeams = styled.aside`
   background: #362233;
 `;
 
-export const StyledChannels = styled.aside`
-  grid-column: 2;
-  grid-row: 1 / 4;
-  background: #52364e;
-`;
-
 export const StyledMessages = styled.main`
   grid-column: 3;
   grid-row: 2 / 3;

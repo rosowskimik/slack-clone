@@ -3,19 +3,29 @@ import {
   StyledHeader,
   StyledTeams,
   StyledInput,
-  StyledChannels,
+  // StyledChannels,
   StyledMessages,
   HomeStyles
 } from './home.style';
+import ChannelsSidebar from '../../components/channels-sidebar/channels-sidebar.component';
 
 interface Props {}
+
+const placeholderChannels = {
+  teamName: 'Test Team',
+  userName: 'Test User',
+  channels: [
+    { id: 1, name: 'Channel 1' },
+    { id: 2, name: 'Channel 2' }
+  ]
+};
 
 const Home: React.FC<Props> = () => {
   return (
     <HomeStyles>
       <StyledHeader />
       <StyledTeams />
-      <StyledChannels />
+      <ChannelsSidebar {...placeholderChannels} />
       <StyledMessages />
       <StyledInput />
     </HomeStyles>
