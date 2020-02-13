@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import Routes from './routes';
+import { GlobalStyle } from './global.style';
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -20,6 +21,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
+    <GlobalStyle />
     <Routes />
   </ApolloProvider>,
   document.getElementById('root')
