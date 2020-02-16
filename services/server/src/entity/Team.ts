@@ -1,6 +1,13 @@
 import { Field, ID, ObjectType } from 'type-graphql';
 import {
-    BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn
+  BaseEntity,
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn
 } from 'typeorm';
 
 import { Channel } from './Channel';
@@ -9,9 +16,9 @@ import { User } from './User';
 @Entity()
 @ObjectType()
 export class Team extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)
-  id: number;
+  id: string;
 
   @Column({ length: 25, unique: true })
   @Field()

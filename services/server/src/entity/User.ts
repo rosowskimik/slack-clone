@@ -1,6 +1,12 @@
 import bcrypt from 'bcrypt';
 import { Field, ID, ObjectType } from 'type-graphql';
-import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 
 import { Channel } from './Channel';
 import { Team } from './Team';
@@ -8,9 +14,9 @@ import { Team } from './Team';
 @Entity()
 @ObjectType()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)
-  id: number;
+  id: string;
 
   @Column({ length: 25, unique: true })
   @Field()
