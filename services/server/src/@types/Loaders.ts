@@ -7,8 +7,8 @@ import { Team } from '../entity/Team';
 import { User } from '../entity/User';
 
 export type GeneratedLoader<
-  V extends BaseEntity & { id: string | number }
-> = () => DataLoader<number, V, number>;
+  V extends BaseEntity & { id: string }
+> = () => DataLoader<string, V, string>;
 
 export type Loaders = {
   // channelLoader: ReturnType<GeneratedLoader<Channel>>;

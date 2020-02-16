@@ -9,10 +9,7 @@ export class RegisterResolver {
   async register(@Arg('data') data: RegisterInput): Promise<User> {
     const user = User.create(data);
 
-    await user.hashPassword(12);
     await user.save();
-    user.teams = [];
-
     return user;
   }
 }

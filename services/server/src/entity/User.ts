@@ -5,7 +5,9 @@ import {
   Column,
   Entity,
   ManyToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  BeforeUpdate
 } from 'typeorm';
 
 import { Channel } from './Channel';
@@ -42,8 +44,10 @@ export class User extends BaseEntity {
   )
   channels: Channel[];
 
-  async hashPassword(salt: string | number) {
-    this.password = await bcrypt.hash(this.password, salt);
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 12);
   }
 
   async isPasswordValid(password: string) {
