@@ -13,10 +13,13 @@ export class UserResolver {
     @Ctx() { loaders }: AppContext,
     @Info() info: GraphQLResolveInfo
   ) {
-    const relations = loadRelations('team', info);
+    if (teams) {
+      const relations = loadRelations('team', info);
 
-    return relations.length > 0
-      ? await loaders.teamLoader.loadMany(teams.map(team => team.id))
-      : teams;
+      return relations.length > 0
+        ? await loaders.teamLoader.loadMany(teams.map(team => team.id))
+        : teams;
+    }
+    return [];
   }
 }
