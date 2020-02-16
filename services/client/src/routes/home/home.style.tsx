@@ -12,12 +12,6 @@ export const StyledHeader = styled.header`
   grid-row: 1;
 `;
 
-export const StyledTeams = styled.aside`
-  grid-column: 1;
-  grid-row: 1 / 4;
-  background: #362233;
-`;
-
 export const StyledMessages = styled.main`
   grid-column: 3;
   grid-row: 2 / 3;

@@ -1,13 +1,12 @@
 import React from 'react';
 import {
   StyledHeader,
-  StyledTeams,
   StyledInput,
-  // StyledChannels,
   StyledMessages,
   HomeStyles
 } from './home.style';
 import ChannelsSidebar from '../../components/channels-sidebar/channels-sidebar.component';
+import TeamsSidebar from '../../components/teams-sidebar/teams-sidebar.component';
 
 interface Props {}
 
@@ -20,11 +19,16 @@ const placeholderChannels = {
   ]
 };
 
+const placeholderTeams = [
+  { id: 1, name: 'Team 1' },
+  { id: 2, name: 'Hello' }
+];
+
 const Home: React.FC<Props> = () => {
   return (
     <HomeStyles>
       <StyledHeader />
-      <StyledTeams />
+      <TeamsSidebar teams={placeholderTeams} />
       <ChannelsSidebar {...placeholderChannels} />
       <StyledMessages />
       <StyledInput />
